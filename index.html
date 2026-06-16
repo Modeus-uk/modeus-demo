@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modeus — Modey Audit</title>
+  <title>Modeus | Missed Call Recovery</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -113,23 +113,17 @@
               <!-- Initial messages injected by script.js -->
             </div>
 
-            <!-- Quick reply chips (iOS predictive-text style) -->
-            <div id="quickReplies" class="quick-replies" style="display: none;">
-              <button class="chip" data-reply="Yes">Yes</button>
-              <button class="chip" data-reply="No">No</button>
-            </div>
+            <!-- Quick reply chips (iOS predictive-text style) — populated by script.js -->
+            <div id="quickReplies" class="quick-replies" style="display: none;"></div>
 
-            <!-- Subtle hint above the fixed input -->
-            <p class="send-hint" id="sendHint">Press send to see how it works.</p>
-
-            <!-- Input bar -->
+            <!-- Input bar (decorative; conversation is driven by the quick replies) -->
             <div class="input-bar">
               <button class="plus-btn" aria-label="Add">
                 <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
               </button>
               <div class="input-field">
-                <input type="text" id="phoneInput" value="Show me how" readonly />
-                <button class="send-btn" id="sendBtn" aria-label="Send">
+                <input type="text" id="phoneInput" placeholder="iMessage" readonly />
+                <button class="send-btn" id="sendBtn" aria-label="Send" disabled>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
                 </button>
               </div>
@@ -148,7 +142,7 @@
       <p class="cta-label">Try it for yourself</p>
       <h2 class="cta-headline">Try it on your own number</h2>
       <p class="cta-sub">
-        Enter your +44 number and Modey will text you the demo. You’ll see how a
+        Enter your +44 number and Modeus will text you the demo. You’ll see how a
         missed caller gets followed up, qualified, and sent back to the business
         owner automatically.
       </p>
@@ -168,7 +162,7 @@
       </p>
 
       <div class="cta-success" id="ctaSuccess" hidden>
-        <p class="success-text">Live SMS demo coming soon — book a call below.</p>
+        <p class="success-text">Live SMS demo coming soon. Book a call below.</p>
         <a class="btn-secondary" href="#">Book a call to tailor this to your business</a>
       </div>
     </section>

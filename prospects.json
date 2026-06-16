@@ -1,0 +1,14 @@
+{
+  "theuncommon": {
+    "firstName": "John",
+    "company": "The Uncommon",
+    "website": "https://theuncommon.co.uk",
+    "leadType": "enquiry"
+  },
+  "powerdirect": {
+    "firstName": "James",
+    "company": "PowerDirect",
+    "website": "https://powerdirect.co.uk",
+    "leadType": "quote request"
+  }
+}

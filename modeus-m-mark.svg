@@ -1,0 +1,29 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" fill="white" d="
+    M56 56
+    H392
+    V112
+    H456
+    V456
+    H56
+    V56
+    Z
+
+    M104 104
+    V408
+    H168
+    V200
+    H224
+    V408
+    H288
+    V200
+    H344
+    V408
+    H408
+    V160
+    H344
+    V104
+    H104
+    Z
+  "/>
+</svg>

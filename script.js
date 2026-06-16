@@ -150,9 +150,10 @@ function pathNotSure() {
   addBubble("Not sure.", "outgoing");
   streamIncoming(
     [
-      "That’s the point.",
+      "That’s where most teams lose useful insight.",
       "If you can’t see response time, follow-up status, and outcome clearly, you’re relying on memory and good intentions.",
-      `Want to see what that would look like for ${companyDisplay}?`,
+      "We make it visible without adding more admin.",
+      `Want to see how that would work inside ${companyDisplay}?`,
     ],
     () => showCtaChips()
   );

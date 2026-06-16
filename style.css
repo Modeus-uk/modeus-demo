@@ -186,6 +186,7 @@ a {
 
 .steps-footer {
   font-size: 15px;
+  font-weight: 700;
   color: var(--text-soft);
   margin-top: 24px;
 }

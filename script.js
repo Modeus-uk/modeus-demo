@@ -99,7 +99,7 @@ function pathNo() {
   addBubble("No, not always.", "outgoing");
   streamIncoming(
     [
-      "That’s exactly where missed opportunities happen.",
+      "That’s exactly why we built this.",
       "When someone calls, texts or sends a WhatsApp message, Modeus replies instantly, asks the right questions, and sends the team a clean summary.",
       "Want to see this working on your own number?",
     ],

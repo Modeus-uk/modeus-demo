@@ -5,6 +5,9 @@
    - Branching quick-reply conversation (no free text)
    ============================================================ */
 
+/* Optional Google Sheet CSV source. Leave empty to use prospects.json. */
+const PROSPECTS_SOURCE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQFsAu2BAmUTwOGPM96VDFUv2T3iR3qLeZ_vkWiwwHAIvP7cCIdhn1VXyK4mUhflPawtn8mc4XrNaPX/pub?gid=0&single=true&output=csv";
+
 const params = new URLSearchParams(window.location.search);
 
 /* ---------- DOM ---------- */
@@ -32,17 +35,10 @@ async function init() {
 }
 
 async function resolveProspect() {
-  // 1. Slug match from prospects.json
+  // 1. Slug match from the configured source (CSV) or prospects.json
   if (slug && slug !== "index.html") {
-    try {
-      const res = await fetch("/prospects.json", { cache: "no-store" });
-      if (res.ok) {
-        const data = await res.json();
-        if (data && data[slug]) return data[slug];
-      }
-    } catch (e) {
-      /* fall through to query params */
-    }
+    const matched = PROSPECTS_SOURCE_URL ? await lookupCsv(slug) : await lookupJson(slug);
+    if (matched) return matched;
   }
 
   // 2. Query-param fallback
@@ -53,8 +49,90 @@ async function resolveProspect() {
     return { firstName: qpFirst, company: qpCompany, leadType: qpLead };
   }
 
-  // 3. No prospect
+  // 3. No prospect -> default homepage
   return null;
+}
+
+/* Lookup a slug in prospects.json (fallback source). */
+async function lookupJson(targetSlug) {
+  try {
+    const res = await fetch("/prospects.json", { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data && data[targetSlug] ? data[targetSlug] : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* Lookup a slug in a Google Sheet CSV export. */
+async function lookupCsv(targetSlug) {
+  try {
+    const res = await fetch(PROSPECTS_SOURCE_URL, { cache: "no-store" });
+    if (!res.ok) return null;
+    const rows = parseCsv(await res.text());
+    const row = rows.find((r) => getField(r, "slug").toLowerCase() === targetSlug);
+    if (!row) return null;
+    return {
+      firstName: getField(row, "firstName"),
+      company: getField(row, "company"),
+      website: getField(row, "website"),
+      leadType: getField(row, "leadType"),
+    };
+  } catch (e) {
+    return null;
+  }
+}
+
+/* Case-insensitive column read from a parsed CSV row. */
+function getField(row, name) {
+  const key = Object.keys(row).find((k) => k.trim().toLowerCase() === name.toLowerCase());
+  return key ? String(row[key] || "").trim() : "";
+}
+
+/* Minimal CSV parser: handles quoted fields, escaped quotes, and CRLF. */
+function parseCsv(text) {
+  const lines = text.replace(/\r\n?/g, "\n").split("\n").filter((l) => l.trim() !== "");
+  if (!lines.length) return [];
+  const headers = splitCsvLine(lines[0]).map((h) => h.trim());
+  return lines.slice(1).map((line) => {
+    const cells = splitCsvLine(line);
+    const obj = {};
+    headers.forEach((h, i) => {
+      obj[h] = cells[i] !== undefined ? cells[i] : "";
+    });
+    return obj;
+  });
+}
+
+function splitCsvLine(line) {
+  const out = [];
+  let cur = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const ch = line[i];
+    if (inQuotes) {
+      if (ch === '"') {
+        if (line[i + 1] === '"') {
+          cur += '"';
+          i++;
+        } else {
+          inQuotes = false;
+        }
+      } else {
+        cur += ch;
+      }
+    } else if (ch === '"') {
+      inQuotes = true;
+    } else if (ch === ",") {
+      out.push(cur);
+      cur = "";
+    } else {
+      cur += ch;
+    }
+  }
+  out.push(cur);
+  return out;
 }
 
 function applyHeadline(prospect) {

@@ -306,9 +306,12 @@ const N8N_WEBHOOK_URL = "https://tailoredworkflow.app.n8n.cloud/webhook/modeus-d
 const ctaForm = document.getElementById("ctaForm");
 const ctaSuccess = document.getElementById("ctaSuccess");
 const ctaSubmitBtn = ctaForm.querySelector('button[type="submit"]');
+const ctaSubmitLabel = ctaSubmitBtn ? ctaSubmitBtn.textContent : "";
+let ctaSubmitted = false; // blocks repeat submits after success
 
 ctaForm.addEventListener("submit", async (e) => {
   e.preventDefault();
+  if (ctaSubmitted) return; // no repeat submit after success
 
   const phoneInputEl = ctaForm.querySelector('input[type="tel"]');
   const phone = phoneInputEl ? phoneInputEl.value.trim() : "";
@@ -325,7 +328,10 @@ ctaForm.addEventListener("submit", async (e) => {
     pageUrl: window.location.href,
   };
 
-  if (ctaSubmitBtn) ctaSubmitBtn.disabled = true;
+  if (ctaSubmitBtn) {
+    ctaSubmitBtn.disabled = true;
+    ctaSubmitBtn.textContent = "Sending...";
+  }
 
   try {
     const res = await fetch(N8N_WEBHOOK_URL, {
@@ -338,9 +344,13 @@ ctaForm.addEventListener("submit", async (e) => {
     const successText = ctaSuccess.querySelector(".success-text");
     if (successText) successText.textContent = "Demo sent. Check your phone.";
     ctaSuccess.hidden = false; // Book a call link inside the block is preserved
-    if (ctaSubmitBtn) ctaSubmitBtn.disabled = false;
+    ctaSubmitted = true;
+    if (ctaSubmitBtn) ctaSubmitBtn.textContent = "Sent"; // stays disabled
   } catch (err) {
-    if (ctaSubmitBtn) ctaSubmitBtn.disabled = false; // allow retry, no false success
+    if (ctaSubmitBtn) {
+      ctaSubmitBtn.textContent = ctaSubmitLabel; // restore "Build my demo"
+      ctaSubmitBtn.disabled = false; // allow retry, no false success
+    }
   }
 });
 

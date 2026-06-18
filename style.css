@@ -583,6 +583,17 @@ a {
   background: var(--blue-dark);
 }
 
+.btn-blue:disabled,
+.btn-blue:disabled:hover {
+  background: #e5e7eb;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  box-shadow: none;
+  cursor: default;
+  opacity: 1;
+  transition: none;
+}
+
 .consent {
   font-size: 11px;
   color: #777777;

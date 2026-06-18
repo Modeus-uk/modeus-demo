@@ -22,6 +22,7 @@ hideChips();
 const slug = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
 
 let companyDisplay = "your business"; // resolved in startConversation, used by later branches
+let currentProspect = null; // resolved in init(), read by the SMS demo form
 
 init();
 
@@ -30,6 +31,7 @@ init();
    ============================================================ */
 async function init() {
   const prospect = await resolveProspect();
+  currentProspect = prospect;
   applyHeadline(prospect);
   startConversation(prospect);
 }
@@ -300,11 +302,46 @@ function hideChips() {
 /* ============================================================
    CTA FORM (bottom of page)
    ============================================================ */
+const N8N_WEBHOOK_URL = "https://tailoredworkflow.app.n8n.cloud/webhook/modeus-demo-request";
 const ctaForm = document.getElementById("ctaForm");
 const ctaSuccess = document.getElementById("ctaSuccess");
-ctaForm.addEventListener("submit", (e) => {
+const ctaSubmitBtn = ctaForm.querySelector('button[type="submit"]');
+
+ctaForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  ctaSuccess.hidden = false;
+
+  const phoneInputEl = ctaForm.querySelector('input[type="tel"]');
+  const phone = phoneInputEl ? phoneInputEl.value.trim() : "";
+  if (!phone) {
+    if (phoneInputEl) phoneInputEl.focus();
+    return; // no false success on empty phone
+  }
+
+  const payload = {
+    firstName: (currentProspect && currentProspect.firstName) || "",
+    company: (currentProspect && currentProspect.company) || "",
+    phone: phone,
+    slug: slug,
+    pageUrl: window.location.href,
+  };
+
+  if (ctaSubmitBtn) ctaSubmitBtn.disabled = true;
+
+  try {
+    const res = await fetch(N8N_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) throw new Error("Webhook responded " + res.status);
+
+    const successText = ctaSuccess.querySelector(".success-text");
+    if (successText) successText.textContent = "Demo sent. Check your phone.";
+    ctaSuccess.hidden = false; // Book a call link inside the block is preserved
+    if (ctaSubmitBtn) ctaSubmitBtn.disabled = false;
+  } catch (err) {
+    if (ctaSubmitBtn) ctaSubmitBtn.disabled = false; // allow retry, no false success
+  }
 });
 
 /* ============================================================

@@ -345,7 +345,7 @@ ctaForm.addEventListener("submit", async (e) => {
     if (successText) successText.textContent = "Demo sent. Check your phone.";
     ctaSuccess.hidden = false; // Book a call link inside the block is preserved
     ctaSubmitted = true;
-    if (ctaSubmitBtn) ctaSubmitBtn.textContent = "Sent"; // stays disabled
+    if (ctaSubmitBtn) ctaSubmitBtn.textContent = "Sent!"; // stays disabled
   } catch (err) {
     if (ctaSubmitBtn) {
       ctaSubmitBtn.textContent = ctaSubmitLabel; // restore "Build my demo"

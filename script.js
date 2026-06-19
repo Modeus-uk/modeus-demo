@@ -18,8 +18,22 @@ const quickReplies = document.getElementById("quickReplies");
 /* Force chips hidden on load — revealed only once a question is ready. */
 hideChips();
 
-/* ---------- Slug ---------- */
-const slug = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+/* Booking link used by every Book a call button. */
+const BOOKING_URL = "https://calendly.com/modeus/30min";
+
+/* ---------- Route: vertical + slug ----------
+   /:slug            -> generic vertical, slug = first segment (unchanged behaviour)
+   /property/:slug   -> property vertical, slug = second segment                       */
+const rawPath = window.location.pathname.replace(/^\/+|\/+$/g, "").toLowerCase();
+const pathParts = rawPath ? rawPath.split("/") : [];
+let vertical = "generic";
+let slug;
+if (pathParts[0] === "property") {
+  vertical = "property";
+  slug = pathParts[1] || "";
+} else {
+  slug = rawPath;
+}
 
 let companyDisplay = "your business"; // resolved in startConversation, used by later branches
 let currentProspect = null; // resolved in init(), read by the SMS demo form
@@ -33,7 +47,48 @@ async function init() {
   const prospect = await resolveProspect();
   currentProspect = prospect;
   applyHeadline(prospect);
+  applyVertical();
   startConversation(prospect);
+}
+
+/* Property vertical: swap the hero-left body copy and add the guarantee + Book a call. */
+function applyVertical() {
+  if (vertical !== "property") return;
+  const heroLeft = document.querySelector(".hero-left");
+  if (!heroLeft) return;
+
+  const bodyParas = heroLeft.querySelectorAll(".body-text");
+  if (bodyParas[0]) {
+    bodyParas[0].textContent = "The sourcing layer that stops information getting lost.";
+  }
+  if (bodyParas[1]) {
+    bodyParas[1].textContent =
+      "Modeus turns scattered seller messages, calls and deal notes into a live deal pipeline, without making you move your business into another system.";
+  }
+
+  const anchor = bodyParas[1] || bodyParas[0];
+  if (!anchor) return;
+
+  const guarantee = document.createElement("p");
+  guarantee.className = "body-text";
+  guarantee.innerHTML =
+    "<strong>We’ll capture your first missed opportunity before you pay a monthly fee.</strong>";
+
+  const ctaWrap = document.createElement("div");
+  ctaWrap.style.margin = "4px 0 18px";
+  const bookBtn = document.createElement("a");
+  bookBtn.className = "btn-secondary";
+  bookBtn.href = BOOKING_URL;
+  bookBtn.target = "_blank";
+  bookBtn.rel = "noopener";
+  bookBtn.textContent = "Book a call";
+  ctaWrap.appendChild(bookBtn);
+
+  const clarify = document.createElement("p");
+  clarify.className = "consent";
+  clarify.textContent = "You only pay the setup to get live.";
+
+  anchor.after(guarantee, ctaWrap, clarify);
 }
 
 async function resolveProspect() {
@@ -256,7 +311,7 @@ function goToDemo() {
 }
 
 function goToBookCall() {
-  scrollToEl("demo");
+  window.open(BOOKING_URL, "_blank", "noopener");
 }
 
 function scrollToEl(id) {
@@ -327,6 +382,10 @@ ctaForm.addEventListener("submit", async (e) => {
     slug: slug,
     pageUrl: window.location.href,
   };
+  if (vertical === "property") {
+    payload.vertical = "property";
+    payload.offerType = "deal_capture";
+  }
 
   if (ctaSubmitBtn) {
     ctaSubmitBtn.disabled = true;

@@ -358,6 +358,7 @@ function hideChips() {
    CTA FORM (bottom of page)
    ============================================================ */
 const N8N_WEBHOOK_URL = "https://tailoredworkflow.app.n8n.cloud/webhook/modeus-demo-request";
+const N8N_PROPERTY_WEBHOOK_URL = "https://tailoredworkflow.app.n8n.cloud/webhook/modeus-property-demo-request";
 const ctaForm = document.getElementById("ctaForm");
 const ctaSuccess = document.getElementById("ctaSuccess");
 const ctaSubmitBtn = ctaForm.querySelector('button[type="submit"]');
@@ -393,7 +394,7 @@ ctaForm.addEventListener("submit", async (e) => {
   }
 
   try {
-    const res = await fetch(N8N_WEBHOOK_URL, {
+    const res = await fetch(vertical === "property" ? N8N_PROPERTY_WEBHOOK_URL : N8N_WEBHOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),

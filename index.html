@@ -89,47 +89,73 @@
         <div class="phone">
           <div class="phone-screen">
 
-            <!-- Status bar -->
-            <div class="status-bar">
-              <span class="status-time">9:41</span>
+            <!-- Status bar (WhatsApp green) -->
+            <div class="status-bar" style="background:#075E54;">
+              <span class="status-time" style="color:#fff;">07:31</span>
               <div class="dynamic-island"></div>
-              <span class="status-icons">
+              <span class="status-icons" style="color:#fff;">
                 <svg viewBox="0 0 18 12" width="17" height="11" fill="currentColor"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4" y="5" width="3" height="7" rx="1"/><rect x="8" y="2.5" width="3" height="9.5" rx="1"/><rect x="12" y="0" width="3" height="12" rx="1"/></svg>
                 <svg viewBox="0 0 16 12" width="16" height="11" fill="currentColor"><path d="M8 2.2c2.3 0 4.4.9 6 2.4l-1 1.1A7 7 0 0 0 8 3.7 7 7 0 0 0 3 5.7l-1-1.1A8.6 8.6 0 0 1 8 2.2zM8 5.6c1.4 0 2.7.5 3.6 1.5l-1 1.1A3.6 3.6 0 0 0 8 7.1c-1 0-1.9.4-2.6 1.1l-1-1.1A5.1 5.1 0 0 1 8 5.6zm0 3.2c.7 0 1.3.3 1.7.8L8 11.4 6.3 9.6c.4-.5 1-.8 1.7-.8z"/></svg>
                 <svg viewBox="0 0 26 13" width="25" height="12" fill="none"><rect x="0.5" y="1" width="21" height="11" rx="3" stroke="currentColor" opacity="0.5"/><rect x="2" y="2.5" width="17" height="8" rx="1.5" fill="currentColor"/><rect x="23" y="4.5" width="2" height="4" rx="1" fill="currentColor" opacity="0.5"/></svg>
               </span>
             </div>
 
-            <!-- Messages app header -->
-            <div class="msg-header">
-              <span class="msg-back">‹</span>
-              <div class="msg-avatar">M</div>
-              <div class="msg-name">M.AI <span class="chev">›</span></div>
+            <!-- WhatsApp chat header (green) -->
+            <div class="msg-header" style="background:#075E54; border-bottom:none; padding:6px 12px 10px; gap:9px;">
+              <span style="color:#fff; font-size:22px; line-height:1; margin-right:1px;">&#8249;</span>
+              <div style="width:32px; height:32px; border-radius:50%; background:#cfd8d4; display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px; color:#075E54; flex-shrink:0;">M</div>
+              <div style="flex:1; min-width:0;">
+                <div style="color:#fff; font-weight:600; font-size:15px; line-height:1.15;">M.AI</div>
+                <div style="color:rgba(255,255,255,0.75); font-size:11px; line-height:1.2;">online</div>
+              </div>
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             </div>
 
-            <!-- Chat area -->
-            <div class="chat" id="chat">
-              <div class="chat-timestamp">
-                <span class="ts-label">Text Message</span><br />
-                Today 9:41 am
+            <!-- Chat (beige + doodle wallpaper) -->
+            <div class="chat" style="background:#ECE5DD; position:relative; padding:0; overflow:hidden;">
+              <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute; inset:0; width:100%; height:100%; opacity:0.45; pointer-events:none;">
+                <defs>
+                  <pattern id="wadoodle" patternUnits="userSpaceOnUse" width="200" height="200">
+                    <g fill="none" stroke="#b7ab93" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round">
+                      <g transform="translate(35,38) rotate(-10)"><path d="M0 -2 C-4 -8 -11 -3 0 6 C11 -3 4 -8 0 -2 Z"/></g>
+                      <g transform="translate(132,40) rotate(8)"><rect x="-12" y="-9" width="24" height="17" rx="4"/><path d="M-5 8 l-2 5 l6 -5"/></g>
+                      <g transform="translate(182,100) rotate(-6)"><rect x="-10" y="-6" width="20" height="14" rx="2"/><circle cx="0" cy="1" r="4"/><path d="M-5 -6 l2 -3 h6 l2 3"/></g>
+                      <g transform="translate(55,112) rotate(6)"><path d="M-7 -6 h13 v7 a6.5 6.5 0 0 1 -13 0 Z"/><path d="M6 -3 a4 4 0 0 1 0 7"/><path d="M-4 -10 v-3 M0 -10 v-3 M4 -10 v-3"/></g>
+                      <g transform="translate(140,122) rotate(-8)"><path d="M-3 9 v-17 l11 -3 v15"/><circle cx="-6" cy="9" r="3.4"/><circle cx="8" cy="4" r="3.4"/></g>
+                      <g transform="translate(30,172)"><circle r="4.5"/><path d="M0 -9 v-4 M0 9 v4 M-9 0 h-4 M9 0 h4 M-6.5 -6.5 l-3 -3 M6.5 6.5 l3 3 M6.5 -6.5 l3 -3 M-6.5 6.5 l-3 3"/></g>
+                      <g transform="translate(176,176)"><circle r="9"/><circle cx="-3.4" cy="-2" r="0.9"/><circle cx="3.4" cy="-2" r="0.9"/><path d="M-4.5 3 a5.5 5.5 0 0 0 9 0"/></g>
+                      <g transform="translate(102,186) rotate(4)"><path d="M-11 -6 L11 0 L-11 6 L-7 0 Z"/><path d="M-7 0 L11 0"/></g>
+                    </g>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#wadoodle)"/>
+              </svg>
+              <div style="position:relative; z-index:1; padding:14px 12px; display:flex; flex-direction:column; gap:8px;">
+                <div style="align-self:center; background:#FCF5C7; border-radius:7px; padding:3px 11px; font-size:11px; color:#5b5a3f;">Today</div>
+
+                <div style="align-self:flex-start; max-width:84%; background:#fff; border-radius:10px; padding:8px 11px; box-shadow:0 1px 0 rgba(0,0,0,0.08);">
+                  <div style="font-size:14px; line-height:1.5; color:#111;">Morning James.</div>
+                  <div style="font-size:14px; line-height:1.5; color:#111; margin-bottom:6px;">Here's what we picked up yesterday.</div>
+                  <div style="font-size:14px; line-height:1.6; color:#111;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#25A35A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><polyline points="20 6 9 17 4 12"/></svg> 4 enquiries captured</div>
+                  <div style="font-size:14px; line-height:1.6; color:#111;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#25A35A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><polyline points="20 6 9 17 4 12"/></svg> Average response time: 38 seconds</div>
+                  <div style="font-size:14px; line-height:1.6; color:#111;"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#25A35A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><polyline points="20 6 9 17 4 12"/></svg> 3 ready to progress</div>
+                  <div style="font-size:11px; color:#8a8a8a; text-align:right; margin-top:3px;">07:30 <svg viewBox="0 0 16 11" width="15" height="10" fill="none" stroke="#34B7F1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M1 6l3 3 6-7"/><path d="M6 9l1 1 6-7"/></svg></div>
+                </div>
+
+                <div style="align-self:flex-start; max-width:84%; background:#fff; border-left:3px solid #075E54; border-radius:4px 10px 10px 4px; padding:8px 11px; box-shadow:0 1px 0 rgba(0,0,0,0.08);">
+                  <div style="font-size:14px; font-weight:600; color:#111;">1 ready for your input</div>
+                  <div style="font-size:14px; line-height:1.5; color:#111; margin-top:2px;">Urgent request. Customer needs a callback to confirm availability.</div>
+                  <div style="font-size:11px; color:#8a8a8a; text-align:right; margin-top:3px;">07:30 <svg viewBox="0 0 16 11" width="15" height="10" fill="none" stroke="#34B7F1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-1px;"><path d="M1 6l3 3 6-7"/><path d="M6 9l1 1 6-7"/></svg></div>
+                </div>
               </div>
-              <!-- Initial messages injected by script.js -->
             </div>
 
-            <!-- Quick reply chips (iOS predictive-text style) — populated by script.js -->
-            <div id="quickReplies" class="quick-replies" style="display: none;"></div>
-
-            <!-- Input bar (decorative; conversation is driven by the quick replies) -->
-            <div class="input-bar">
-              <button class="plus-btn" aria-label="Add">
-                <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-              </button>
-              <div class="input-field">
-                <input type="text" id="phoneInput" placeholder="iMessage" readonly />
-                <button class="send-btn" id="sendBtn" aria-label="Send" disabled>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
-                </button>
-              </div>
+            <!-- WhatsApp input bar (static, decorative) -->
+            <div class="input-bar" style="background:#F0F0F0; padding:8px 10px;">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#555" stroke-width="1.8" stroke-linecap="round"><line x1="12" y1="6" x2="12" y2="18"/><line x1="6" y1="12" x2="18" y2="12"/></svg>
+              <div style="flex:1; background:#fff; border-radius:18px; padding:7px 13px; font-size:13px; color:#9a9a9a;">Message</div>
+              <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#075E54" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
             </div>
 
             <!-- Home indicator -->

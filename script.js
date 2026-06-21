@@ -15,8 +15,7 @@ const headlineEl = document.getElementById("headline");
 const chat = document.getElementById("chat");
 const quickReplies = document.getElementById("quickReplies");
 
-/* Force chips hidden on load — revealed only once a question is ready. */
-hideChips();
+/* iPhone shows a static WhatsApp brief — interactive conversation disabled. */
 
 /* Booking link used by every Book a call button. */
 const BOOKING_URL = "https://calendly.com/modeus/30min";
@@ -48,7 +47,7 @@ async function init() {
   currentProspect = prospect;
   applyHeadline(prospect);
   applyVertical();
-  startConversation(prospect);
+  // startConversation(prospect); // disabled: static WhatsApp brief
 }
 
 /* Property vertical: swap the hero-left body copy and add the guarantee + Book a call. */

@@ -194,7 +194,7 @@ function splitCsvLine(line) {
 function applyHeadline(prospect) {
   const firstName = prospect && prospect.firstName ? String(prospect.firstName).trim() : "";
   const greeting = firstName ? `Hi ${escapeHtml(firstName)},<br />` : "";
-  headlineEl.innerHTML = `${greeting}Missed calls shouldn’t mean missed opportunities.`;
+  headlineEl.innerHTML = `${greeting}Every enquiry. Accounted for.`;
 }
 
 /* ============================================================
